@@ -79,14 +79,13 @@ Vagrant.configure("2") do |config|
     sudo apt-get install -qy moby-engine
     sudo apt-get install -qy moby-cli
 
-    # Install IoT Edge
-    sudo apt-get install -qy iotedge
-
     # Override config file
     if [ -f /vagrant/edge-config.yaml ]; then
       sudo cp /etc/iotedge/config.yaml /etc/iotedge/backup-config.yaml
       sudo ln -sf /vagrant/edge-config.yaml /etc/iotedge/config.yaml
-      sudo systemctl restart iotedge
     fi
+
+    # Install IoT Edge
+    sudo apt-get install -qy iotedge
   SHELL
 end
