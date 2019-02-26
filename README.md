@@ -22,3 +22,13 @@ docker run \
     -it \
     <image_name>
 ```
+
+# To run Vagrant Edge
+```bash
+
+# Add your Edge device connection string: device_connection_string
+vim edge-config.yaml
+
+# Provision and bring up your vagrant
+vagrant up
+```
