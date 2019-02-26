@@ -21,7 +21,7 @@
 1. Proxy the stream:
 
     ```
-    az iot edge proxy -n [hub] -d [device created earlier] --port [port]
+    az iot hub proxy -n [hub] -d [device created earlier] --port [port]
     ```
 
 1. Open another terminal window
