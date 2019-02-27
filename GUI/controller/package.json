@@ -1,0 +1,14 @@
+{
+  "name": "device-streams-service-samples",
+  "version": "0.0.1",
+  "private": true,
+  "main": "echo.js",
+  "author": "Microsoft Corp.",
+  "license": "MIT",
+  "dependencies": {
+    "azure-iothub": "^1.10.0-preview.0",
+    "express": "^4.16.4",
+    "websocket": "^1.0.28",
+    "websocket-stream": "^5.1.2"
+  }
+}
