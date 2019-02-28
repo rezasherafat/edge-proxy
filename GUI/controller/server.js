@@ -1,7 +1,8 @@
 const express = require('express');        // call express
 const WebSocketClient = require('websocket').client;
 const client = new WebSocketClient();
-
+const node_ssh = require('node-ssh');
+const sshClient = new node_ssh();
 var childProcess = require('child_process');
 client.on('connectFailed', function (error) {
   console.log(`Client connect error: ${error.toString()}`);
@@ -23,17 +24,6 @@ proxyProcess.on('exit', function (code) {
 //when we connect to the client
 client.on('connect', function (connection) {
   console.log('WebSocket Client Connected');
-  const app = express();
-  const port = process.env.PORT || 8080;
-  const router = express.Router();
-  const bodyParser = require('body-parser');
-  app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(bodyParser.json());
-  app.use('/api', router);
-  app.listen(port);;
-  console.log(`API listening on port ${port}`);
-  console.log('Send POST command with the following JSON schema: {"cmd":"shell_command"}');
-
   //manage messages from the 'device'
   connection.on('error', function (error) {
     console.log(`Connection Error: ${error.toString()}`);
@@ -46,17 +36,39 @@ client.on('connect', function (connection) {
       console.log(`Device Received: '${message.utf8Data}'`);
     }
   });
-  
-  //setup simple POST route with json object:
-  //{ "cmd":"command_here"}
-  app.post('/api/send', function (req, res, cb) {
-    const cmd = req.body.cmd;
-    console.log(`Attempting to send command '${cmd}' to device.`);
-    connection.sendUTF(cmd.toString());
-    res.send(`sent '${cmd}' to device.`);
-  });
 
 });
 
 //do the thing
-client.connect('ws://localhost:2223/', 'echo-protocol');
+// client.connect('ws://localhost:2223/', 'echo-protocol');
+sshClient.connect({
+  host: 'localhost',
+  port: 2223,
+
+}).then(connection => {
+  console.log('ssh connected');
+  const app = express();
+  const port = process.env.PORT || 8080;
+  const router = express.Router();
+  const bodyParser = require('body-parser');
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.json());
+  app.use('/api', router);
+  app.listen(port);;
+  console.log(`API listening on port ${port}`);
+  console.log('Send POST command with the following JSON schema: {"cmd":"shell_command"}');
+  //setup simple POST route with json object:
+  //{ "cmd":"command_here"}
+  app.post('/api/send', function (req, res, cb) {
+    const cmd = req.body.cmd;
+    console.log('-----');
+    console.log(`${cmd}`);
+    sshClient.execCommand(cmd.toString()).then(response => {
+      res.send({resp:response.stdout, err:response.stderr});
+      response.stdout && console.log(response.stdout);
+      response.stderr && console.error(response.stderr);
+    });
+    console.log('-----');
+  });
+
+});

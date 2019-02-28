@@ -7,6 +7,7 @@ var websocket = require('websocket-stream')
 var ServiceClient = require('azure-iothub').Client;
 var net = require('net');
 
+
 var proxyServer = net.createServer(function (socket) {
   socket.on('end', function () {
     console.log('client socket disconnected');
