@@ -1,4 +1,4 @@
-Edge proxy is an IoT Edge module that enables end-to-end connectivity to your Edge device using (device streams)[https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-device-streams-overview]. Ensure your IoT Hub/edge is provisioned in one of the [supported regions](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-device-streams-overview#regional-availability).
+Edge proxy is an IoT Edge module that enables end-to-end connectivity to your Edge device using [device streams](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-device-streams-overview). Ensure your IoT Hub/edge is provisioned in one of the [supported regions](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-device-streams-overview#regional-availability).
 
 To set up edge proxy for trial purposes, you need to:
 * [Provision an IoT Edge device in a Vagrant VM](#to-set-up-iot-edge-in-a-vagrant-vm) (skip this step if you already have an IoT edge device)
