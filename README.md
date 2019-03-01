@@ -72,11 +72,12 @@ docker build -t <image_name> .
     ```
 
 1. Open another terminal window
-1. Run
+1. Use a valid username and credentials to SSH to your IoT edge device.
 
     ```
     ssh -p [port] username@localhost
     ```
+    For the case of vagrant, use `ssh -i .vagrant/machines/default/virtualbox/private_key -p 2222 vagrant@localhost`. Note you need to use the private key of your Vagrant VM (this is usually stored in your provisioned VM folder under `.vagrant/machines/default/virtualbox/private_key`.
 
 # Run edge proxy in docker
 ```bash
