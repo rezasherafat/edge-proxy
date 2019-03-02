@@ -2,7 +2,7 @@ Edge proxy is an IoT Edge module that enables end-to-end connectivity to your Ed
 
 To set up edge proxy for trial purposes, you need to:
 * [Provision an IoT Edge device in a Vagrant VM](#to-set-up-iot-edge-in-a-vagrant-vm) (skip this step if you already have an IoT edge device)
-* [Build the edge proxy](#to-build-the-edge-proxy-image) (skip this sptep if you would rather use the pre-built image published [here](https://hub.docker.com/r/rezas/edgeproxy))
+* [Build the edge proxy](#to-build-the-edge-proxy-image) (skip this step if you would rather use the pre-built image published [here](https://hub.docker.com/r/rezas/edgeproxy))
 * [Deploy edge proxy](#to-deploy-edge-proxy-to-iot-edge)
 * [SSH using Azure CLI](#ssh-using-edge-proxy-and-azure-cli)
 
@@ -30,7 +30,7 @@ sudo vim /etc/iotedge/config.yaml
 sudo systemctl restart iotedge
 ```
 
-Once done, check that IoT Edge runtime is up active and edgeAgent is running:
+Once done, check that IoT Edge runtime is active and edgeAgent is running:
 ```bash
 # Output of command below should show the daemon is in 'active (running)' state
 sudo systemctl status iotedge
@@ -41,16 +41,20 @@ sudo iotedge list
 ```
 
 # To build the edge proxy image
+In your cloned repository folder, run:
 ```bash
 docker build -t <image_name> .
+docker push <image_name>
 ```
+You can skip this step and use pre-built image `rezas/edgeproxy:0.40_mqtt` that is published [here](https://hub.docker.com/r/rezas/edgeproxy).
+
 
 # To deploy edge proxy to IoT edge
 
 1. Register a **regular** IoT device and remember the device name and the connection string
 1. Register and create IoT Edge device, make sure it's running ok
 1. Add a deployment module using **Set modules**
-1. In **Image URI**, fill in `rezas/edgeproxy:0.40_mqtt`
+1. In **Image URI**, fill in `rezas/edgeproxy:0.40_mqtt` to use the pre-published image or use the `image_name` you porvided [here](#to-build-the-edge-proxy-image)
 1. In **Environment Variables**, add these three fields
 
     | Name | Value | Comment |
