@@ -7,31 +7,19 @@ To set up edge proxy for trial purposes, you need to:
 * [SSH using Azure CLI](#ssh-using-edge-proxy-and-azure-cli)
 
 # To set up IoT edge in a Vagrant VM
-Install [Vagrant](https://www.vagrantup.com/intro/getting-started/install.html) and use `Vagrantfile` in this repo to provision the VM by running:
+* Install [Vagrant](https://www.vagrantup.com/intro/getting-started/install.html)
+* Create an IoT Edge device (follow instructions [here](https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux#register-an-iot-edge-device)) and update `device_connection_string` in `edge-config.yaml` with its connection string
+* Use `Vagrantfile` in this repo to provision the VM by running:
 ```bash
-# Provision and bring up your vagrant VM
-vagrant up
-```
-
-Once the provisioning of the VM is complete, you need to create an IoT Edge device in IoT Hub (follow instructions [here](https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux#register-an-iot-edge-device)).
-
-To add your IoT Edge device credentials to your Edge runtime, SSH to your Edge device and update the IoT Edge daemon's configuration file. SSH to your vagrant VM using:
-```bash
-# SSH to you provisioned VM
-vagrant ssh
-```
-
-Inside your VM, run the following commands:
-```bash
-# Update device_connection_string under provisioning section
-sudo vim /etc/iotedge/config.yaml
-
-# Restart IoT Edge daemon
-sudo systemctl restart iotedge
+  # Provision and bring up your vagrant VM
+  vagrant up
 ```
 
 Once done, check that IoT Edge runtime is active and edgeAgent is running:
 ```bash
+# SSH to your vagrant VM
+vagrant ssh
+
 # Output of command below should show the daemon is in 'active (running)' state
 sudo systemctl status iotedge
 
