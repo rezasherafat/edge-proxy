@@ -82,6 +82,7 @@ Vagrant.configure("2") do |config|
     # Override config file
     if [ -f /vagrant/edge-config.yaml ]; then
       sudo cp /etc/iotedge/config.yaml /etc/iotedge/backup-config.yaml
+      sudo mkdir -p /etc/iotedge/
       sudo ln -sf /vagrant/edge-config.yaml /etc/iotedge/config.yaml
     fi
 
