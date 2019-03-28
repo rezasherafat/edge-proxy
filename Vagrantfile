@@ -89,10 +89,10 @@ Vagrant.configure("2") do |config|
     # Install IoT Edge
     sudo apt-get install -qy iotedge
 
-    # Give access to iotedge user
+    # Give iotedge user access to its config file/folder
     sudo chown iotedge -R /etc/iotedge/
 
-    # REstart IoTEdge service to use the config
-    sudo apt-get install -qy iotedge
+    # Restart IoTEdge service to use the config
+    sudo systemctl restart iotedge
   SHELL
 end
