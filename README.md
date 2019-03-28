@@ -6,6 +6,8 @@ To set up edge proxy for trial purposes, you need to:
 * [Deploy edge proxy](#to-deploy-edge-proxy-to-iot-edge)
 * [SSH using Azure CLI](#ssh-using-edge-proxy-and-azure-cli)
 
+![alt text](./media/edge-proxy-setup.png)
+
 # To set up IoT edge in a Vagrant VM
 * Install [Vagrant](https://www.vagrantup.com/intro/getting-started/install.html)
 * Create an IoT Edge device (follow instructions [here](https://docs.microsoft.com/en-us/azure/iot-edge/quickstart-linux#register-an-iot-edge-device)) and update `device_connection_string` in `edge-config.yaml` with its connection string
