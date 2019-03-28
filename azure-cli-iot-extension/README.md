@@ -7,7 +7,7 @@ Note: if you already have IoT CLI extensions already installed, you will need to
 
 # To run
 ```bash
-az iot edge proxy -h
+az iot hub proxy -h
 
-az iot edge proxy -n [hub] -d [device] --port [port]
+az iot hub proxy -n [hub] -d [device] --port [port]
 ```
